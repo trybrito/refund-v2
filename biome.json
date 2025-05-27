@@ -30,7 +30,7 @@
 				"useImportType": "off"
 			},
 			"nursery": {
-				"useSortedClasses": "warn"
+				"useSortedClasses": "off"
 			}
 		},
 		"ignore": ["src/core/events/domain-events.ts"]
