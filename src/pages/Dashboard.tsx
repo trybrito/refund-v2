@@ -9,7 +9,7 @@ const REFUND_EXAMPLE = {
 	id: '1',
 	name: 'Thiago',
 	category: 'Alimentação',
-	amount: '39,99',
+	amount: 39.9,
 	categoryImg: CATEGORIES.food.icon,
 }
 

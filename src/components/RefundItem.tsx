@@ -1,10 +1,11 @@
 import type React from 'react'
+import { FormatCurrency } from '../utils/formatCurrency'
 
 export type RefundItemProps = {
 	id: string
 	name: string
 	category: string
-	amount: string
+	amount: number
 	categoryImg: string
 }
 
@@ -30,8 +31,8 @@ export function RefundItem({ data, ...props }: Props) {
 			</div>
 
 			<span className="text-sm text-gray-100 font-semibold">
-				<small className="font-normal text-gray-200 mr-1">R$</small>
-				{data.amount}
+				<small className="font-normal text-gray-200">R$</small>
+				{FormatCurrency(data.amount)}
 			</span>
 		</a>
 	)
