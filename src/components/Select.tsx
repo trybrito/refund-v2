@@ -12,7 +12,7 @@ export function Select({ label, children, ...props }: Props) {
 					{label}
 
 					<select
-						className="mt-2 h-12 font-normal rounded-lg border border-gray-300 focus:outline-green-100 focus:caret-green-100 px-4 text-gray-200 text-sm bg-transparent cursor-pointer"
+						className="mt-2 h-12 font-normal rounded-lg border border-gray-300 focus:outline-green-100 focus:caret-green-100 px-4 text-gray-200 text-sm bg-transparent not-disabled:cursor-pointer"
 						value=""
 						{...props}
 					>

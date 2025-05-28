@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import searchSvg from '../assets/search.svg'
 import { Button } from '../components/Button'
 import { Input } from '../components/Input'
-import { RefundItem } from '../components/RefundItem'
+import { Pagination } from '../components/Pagination'
+import { RefundItem, type RefundItemProps } from '../components/RefundItem'
 import { CATEGORIES } from '../utils/categories'
 
 const REFUND_EXAMPLE = {
@@ -15,11 +16,28 @@ const REFUND_EXAMPLE = {
 
 export function Dashboard() {
 	const [search, setSearch] = useState('')
+	const [page, setPage] = useState(1)
+	const [pageTotal, setPageTotal] = useState(10)
+	const [refunds, setRefunds] = useState<RefundItemProps[]>([REFUND_EXAMPLE])
 
 	function fetchRefunds(e: React.FormEvent) {
 		e.preventDefault()
 
 		console.log(search)
+	}
+
+	function handlePagination(action: 'next' | 'previous') {
+		setPage((prevPage) => {
+			if (action === 'next' && prevPage < pageTotal) {
+				return prevPage + 1
+			}
+
+			if (action === 'previous' && prevPage > 1) {
+				return prevPage - 1
+			}
+
+			return prevPage
+		})
 	}
 
 	return (
@@ -44,8 +62,23 @@ export function Dashboard() {
 			</form>
 
 			<div className="flex flex-col gap-4 max-h-[342px] overflow-y-scroll">
-				<RefundItem data={REFUND_EXAMPLE} />
+				{refunds.map((item) => {
+					return (
+						<RefundItem
+							key={item.id}
+							data={item}
+							href={`/admin/refund/${item.id}`}
+						/>
+					)
+				})}
 			</div>
+
+			<Pagination
+				current={page}
+				total={pageTotal}
+				onPrevious={() => handlePagination('previous')}
+				onNext={() => handlePagination('next')}
+			/>
 		</div>
 	)
 }
