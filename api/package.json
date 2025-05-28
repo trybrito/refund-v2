@@ -14,11 +14,14 @@
     "@types/cors": "2.8.17",
     "@types/express": "5.0.0",
     "@types/node": "22.15.23",
+    "prisma": "6.2.1",
     "ts-node": "10.9.2",
     "tsx": "4.19.2",
     "typescript": "5.7.3"
   },
   "dependencies": {
+    "@prisma/client": "6.2.1",
+    "api": "link:",
     "cors": "2.8.5",
     "express": "4.19.2",
     "express-async-errors": "3.1.1",
