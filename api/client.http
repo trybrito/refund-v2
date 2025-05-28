@@ -1,0 +1,4 @@
+@baseURL = http://localhost:3333
+
+# @name test_route
+GET {{baseURL}}/
