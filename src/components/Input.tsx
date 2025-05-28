@@ -8,7 +8,7 @@ export function Input({ label, type = 'text', ...props }: Props) {
 	return (
 		<fieldset className="max-h-20 text-gray-200">
 			{label ? (
-				<label className="flex flex-1 flex-col uppercase text-xxs focus-within:font-bold focus-within:text-green-100">
+				<label className="flex flex-1 flex-col uppercase text-xxs focus-within:font-bold focus-within:text-green-100 cursor-pointer">
 					{label}
 
 					<input
