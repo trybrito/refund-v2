@@ -6,14 +6,14 @@ type Props = React.ComponentProps<'input'> & {
 
 export function Input({ label, type = 'text', ...props }: Props) {
 	return (
-		<fieldset className="max-h-20 text-gray-200 w-full">
+		<fieldset className="flex flex-1 max-h-20 text-gray-200">
 			{label ? (
 				<label className="flex flex-1 flex-col uppercase text-xxs focus-within:font-bold focus-within:text-green-100 cursor-pointer">
 					{label}
 
 					<input
 						type={type}
-						className="mt-2 h-12 font-normal rounded-lg border border-gray-300 focus:outline-green-100 focus:caret-green-100 px-4 text-gray-100  placeholder:text-gray-200 text-sm bg-transparent"
+						className="w-full font-normal mt-2 h-12 rounded-lg border border-gray-300 focus:outline-green-100 focus:caret-green-100 px-4 text-gray-100  placeholder:text-gray-200 text-sm bg-transparent"
 						{...props}
 					/>
 				</label>

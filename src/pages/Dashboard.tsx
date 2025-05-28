@@ -45,7 +45,7 @@ export function Dashboard() {
 			<h1 className="text-gray-100 font-bold text-xl flex-1">Solicitações</h1>
 
 			<form
-				className="flex  items-center pb-6 border-b border-b-gray-400 md:flex-row gap-2"
+				className="flex flex-1 justify-between items-center pb-6 border-b border-b-gray-400 md:flex-row gap-2"
 				onSubmit={fetchRefunds}
 			>
 				<Input
