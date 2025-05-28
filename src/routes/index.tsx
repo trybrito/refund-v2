@@ -1,11 +1,12 @@
 import { BrowserRouter } from 'react-router'
-import { EmployeeRoutes } from './EmployeeRoutes'
+import { ManagerRoutes } from './ManagerRoutes'
 
 export function Router() {
 	return (
 		<BrowserRouter>
 			{/* <AuthRoutes /> */}
-			<EmployeeRoutes />
+			{/* <EmployeeRoutes /> */}
+			<ManagerRoutes />
 		</BrowserRouter>
 	)
 }
