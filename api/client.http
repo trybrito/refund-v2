@@ -7,9 +7,9 @@ Content-Type: application/json
 
 {
   "name": "Thiago",
-  "email": "thiago@mail.com",
+  "email": "thiago1@mail.com",
   "password": "123456",
-  "role": "manager"
+  "role": "employee"
 }
 
 ###
@@ -19,6 +19,13 @@ POST {{baseURL}}/sessions
 Content-Type: application/json
 
 {
-  "email": "thiago@mail.com",
+  "email": "thiago1@mail.com",
   "password": "123456"
 }
+
+###
+
+# @name create_refund
+POST {{baseURL}}/refunds
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
