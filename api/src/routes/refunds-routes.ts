@@ -17,4 +17,10 @@ refundsRoutes.get(
 	refundsController.fetch,
 )
 
+refundsRoutes.get(
+	'/:id',
+	verifyUserAuthorization(['employee', 'manager']),
+	refundsController.find,
+)
+
 export { refundsRoutes }

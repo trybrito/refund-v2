@@ -42,3 +42,9 @@ Authorization: Bearer {{authToken}}
 # @name fetch_refunds
 GET {{baseURL}}/refunds?name=thiago&perPage=1&page=2
 Authorization: Bearer {{authToken}}
+
+###
+
+# @name find_refund
+GET {{baseURL}}/refunds/379e271f-8051-49bd-8f50-148affe3a204
+Authorization: Bearer {{authToken}}
