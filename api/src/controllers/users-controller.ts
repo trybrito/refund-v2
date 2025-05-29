@@ -49,6 +49,6 @@ export class UsersController {
 			},
 		})
 
-		res.status(201).json()
+		res.status(204).json()
 	}
 }
