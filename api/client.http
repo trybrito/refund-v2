@@ -19,7 +19,7 @@ POST {{baseURL}}/sessions
 Content-Type: application/json
 
 {
-  "email": "thiago@mail.com",
+  "email": "thiago1@mail.com",
   "password": "123456"
 }
 
@@ -48,3 +48,21 @@ Authorization: Bearer {{authToken}}
 # @name find_refund
 GET {{baseURL}}/refunds/379e271f-8051-49bd-8f50-148affe3a204
 Authorization: Bearer {{authToken}}
+
+###
+
+# @name upload_file
+POST {{baseURL}}/uploads
+Authorization: Bearer {{authToken}}
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"
+
+file
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="example.jfif"
+Content-Type: image/jfif
+
+< ./src/test/tmp/example.jfif
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
