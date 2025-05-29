@@ -19,7 +19,7 @@ POST {{baseURL}}/sessions
 Content-Type: application/json
 
 {
-  "email": "thiago1@mail.com",
+  "email": "thiago@mail.com",
   "password": "123456"
 }
 
@@ -36,3 +36,9 @@ Authorization: Bearer {{authToken}}
   "amount": 39.99,
   "filename": "lunch.png"
   }
+
+###
+
+# @name fetch_refunds
+GET {{baseURL}}/refunds?name=thiago&perPage=1&page=2
+Authorization: Bearer {{authToken}}
