@@ -68,7 +68,7 @@ export function Dashboard() {
 	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
 	useEffect(() => {
 		fetchRefunds()
-	}, [])
+	}, [page])
 
 	return (
 		<div className="bg-gray-500 rounded-xl p-10 md:min-w-[768px] flex flex-col gap-6">
@@ -94,11 +94,7 @@ export function Dashboard() {
 			<div className="flex flex-col gap-4 max-h-[342px] overflow-y-scroll">
 				{refunds.map((item) => {
 					return (
-						<RefundItem
-							key={item.id}
-							data={item}
-							href={`/admin/refund/${item.id}`}
-						/>
+						<RefundItem key={item.id} data={item} href={`/refund/${item.id}`} />
 					)
 				})}
 			</div>

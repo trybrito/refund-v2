@@ -1,5 +1,5 @@
 import { AxiosError } from 'axios'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router'
 import { ZodError, z } from 'zod'
 import fileSvg from '../assets/file.svg'
@@ -9,6 +9,7 @@ import { Select } from '../components/Select'
 import { Upload } from '../components/Upload'
 import { api } from '../services/api'
 import { CATEGORIES, CATEGORIES_KEYS } from '../utils/categories'
+import { formatCurrency } from '../utils/formatCurrency'
 
 const refundSchema = z.object({
 	name: z
@@ -25,6 +26,7 @@ export function Refund() {
 	const [amount, setAmount] = useState('')
 	const [category, setCategory] = useState('')
 	const [file, setFile] = useState<File | null>(null)
+	const [fileURL, setFileURL] = useState<string | null>(null)
 	const [isLoading, setIsLoading] = useState(false)
 
 	const navigate = useNavigate()
@@ -77,6 +79,32 @@ export function Refund() {
 		}
 	}
 
+	async function fetchRefund(id: string) {
+		try {
+			const { data } = await api.get<{ refund: RefundAPIResponse }>(
+				`/refunds/${id}`,
+			)
+
+			setName(data.refund.name)
+			setCategory(data.refund.category)
+			setAmount(formatCurrency(data.refund.amount / 100))
+			setFileURL(data.refund.filename)
+		} catch (error) {
+			if (error instanceof AxiosError) {
+				return alert(error.response?.data.message)
+			}
+
+			alert('Não foi possível carregar os dados desta solicitação')
+		}
+	}
+
+	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+	useEffect(() => {
+		if (params.id) {
+			fetchRefund(params.id)
+		}
+	}, [params.id])
+
 	return (
 		<form
 			className="bg-gray-500 w-full rounded-xl flex flex-col p-10 gap-6 lg:min-w-[512px]"
@@ -126,12 +154,12 @@ export function Refund() {
 				/>
 			</div>
 
-			{params.id ? (
+			{params.id && fileURL ? (
 				<a
-					href="https://github.com"
+					href={`http://localhost:3333/uploads/${fileURL}`}
 					target="_blank"
-					rel="noreferrer noopener"
 					className="text-sm text-green-100 font-semibold flex items-center justify-center gap-2 my-2"
+					rel="noreferrer"
 				>
 					<img src={fileSvg} alt="Ícone de arquivo" />
 					Abrir comprovante
