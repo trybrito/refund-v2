@@ -9,7 +9,7 @@ import { api } from '../services/api'
 
 const SignUpSchema = z
 	.object({
-		name: z.string().min(1, { message: 'Informe um nome para a solicitação' }),
+		name: z.string().min(1, { message: 'Informe um nome' }),
 		email: z.string().email({ message: 'Informe um e-mail válido' }),
 		password: z
 			.string()

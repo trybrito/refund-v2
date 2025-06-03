@@ -1,4 +1,5 @@
 import { type ReactNode, createContext, useEffect, useState } from 'react'
+import { api } from '../services/api'
 
 type AuthContext = {
 	isLoading: boolean
@@ -25,6 +26,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 			JSON.stringify(data.token),
 		)
 
+		api.defaults.headers.common.Authorization = `Bearer ${data.token}`
+
 		setSession(data)
 	}
 
@@ -33,9 +36,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 		const token = localStorage.getItem(`${LOCAL_STORAGE_KEY_PREFIX}:token`)
 
 		if (user && token) {
+			const parsedUser = JSON.parse(user)
+			const parsedToken = JSON.parse(token)
+
+			api.defaults.headers.common.Authorization = `Bearer ${parsedToken}`
+
 			setSession({
-				user: JSON.parse(user),
-				token,
+				user: parsedUser,
+				token: parsedToken,
 			})
 		}
 
