@@ -1,36 +1,68 @@
-import type React from 'react'
-import { useState } from 'react'
+import { AxiosError } from 'axios'
+import { useActionState } from 'react'
+import { ZodError, z } from 'zod'
 import { Button } from '../components/Button'
 import { Input } from '../components/Input'
+import { api } from '../services/api'
+
+const signInSchema = z.object({
+	email: z.string().email({ message: 'Informe um e-mail válido' }),
+	password: z.string().trim().min(1, { message: 'Informe a senha' }),
+})
 
 export function SignIn() {
-	const [email, setEmail] = useState('')
-	const [password, setPassword] = useState('')
-	const [isLoading, setIsLoading] = useState(false)
+	const [state, formAction, isLoading] = useActionState(handleSignIn, null)
 
-	function onSubmit(e: React.FormEvent) {
-		e.preventDefault()
+	async function handleSignIn(_prevState: unknown, formData: FormData) {
+		try {
+			const data = signInSchema.parse({
+				email: formData.get('email'),
+				password: formData.get('password'),
+			})
 
-		console.log(email, password)
+			const response = await api.post('/sessions', data)
+
+			console.log(response.data)
+		} catch (error) {
+			if (error instanceof ZodError) {
+				return { message: error.issues[0].message }
+			}
+
+			if (error instanceof AxiosError) {
+				return { message: error.response?.data.message }
+			}
+
+			console.log(error)
+
+			return { message: 'Não foi possível realizar o login' }
+		}
 	}
 
 	return (
-		<form className="w-full flex flex-col gap-4" onSubmit={onSubmit}>
+		<form action={formAction} className="w-full flex flex-col gap-4">
 			<Input
 				label="E-mail"
 				type="email"
+				name="email"
 				placeholder="seu@email.com"
-				onChange={(e) => setEmail(e.target.value)}
 				required
 			/>
 
 			<Input
 				label="Senha"
 				type="password"
+				name="password"
 				placeholder="123456"
-				onChange={(e) => setPassword(e.target.value)}
 				required
 			/>
+
+			{state?.message ? (
+				<p className="text-sm text-red-600 text-center font-medium">
+					{state?.message}
+				</p>
+			) : (
+				<></>
+			)}
 
 			<Button type="submit" isLoading={isLoading}>
 				Entrar

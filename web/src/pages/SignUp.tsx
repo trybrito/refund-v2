@@ -13,6 +13,7 @@ const SignUpSchema = z
 		email: z.string().email({ message: 'Informe um e-mail válido' }),
 		password: z
 			.string()
+			.trim()
 			.min(6, { message: 'A senha precisa ter, pelo menos, 6 caracteres' }),
 		confirmPassword: z.string({ message: 'Confirme a senha' }),
 	})
