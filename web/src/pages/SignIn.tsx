@@ -3,6 +3,7 @@ import { useActionState } from 'react'
 import { ZodError, z } from 'zod'
 import { Button } from '../components/Button'
 import { Input } from '../components/Input'
+import { useAuth } from '../hooks/useAuth'
 import { api } from '../services/api'
 
 const signInSchema = z.object({
@@ -13,6 +14,8 @@ const signInSchema = z.object({
 export function SignIn() {
 	const [state, formAction, isLoading] = useActionState(handleSignIn, null)
 
+	const auth = useAuth()
+
 	async function handleSignIn(_prevState: unknown, formData: FormData) {
 		try {
 			const data = signInSchema.parse({
@@ -22,7 +25,8 @@ export function SignIn() {
 
 			const response = await api.post('/sessions', data)
 
-			console.log(response.data)
+			console.log(response)
+			auth.saveSessionData(response.data)
 		} catch (error) {
 			if (error instanceof ZodError) {
 				return { message: error.issues[0].message }
