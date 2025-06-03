@@ -71,4 +71,3 @@ Content-Type: image/png
 
 # @name find_file
 GET {{baseURL}}/uploads/a6927ad9652baf0a6a2c-example.png
-Authorization: Bearer {{authToken}}

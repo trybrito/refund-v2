@@ -12,8 +12,9 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
-app.use(routes)
 app.use('/uploads', express.static(uploadConfig.UPLOADS_FOLDER))
+
+app.use(routes)
 app.use(errorHandling)
 
 export { app }

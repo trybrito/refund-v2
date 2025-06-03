@@ -22,7 +22,7 @@ export class RefundsController {
 			amount: z.coerce
 				.number()
 				.positive({ message: 'O valor precisa ser positivo' }),
-			filename: z.string(),
+			filename: z.string().min(20),
 		})
 
 		const { name, category, amount, filename } = bodySchema.parse(req.body)
